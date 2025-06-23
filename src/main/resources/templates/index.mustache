@@ -10,7 +10,7 @@
             <!-- {{! title}}  현재 Board 객체의 title 멤버 변수에 값을 출력한다.
                 머스태치는 자동으로 getTitle() 메서드를 호출 한 것이다.-->
             <h4 class="card-title mb-3">{{title}}</h4>
-            <p>작성시간:{{getTime}}</p>
+            <p>작성자:{{user.username}}&nbsp;|&nbsp;{{time}}</p>
             <a href="/board/{{id}}" class="btn btn-primary">상세보기</a>
         </div>
     </div>

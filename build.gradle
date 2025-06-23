@@ -24,6 +24,11 @@ repositories {
 }
 
 dependencies {
+
+    // 테스트 코드용 lombok
+    testCompileOnly 'org.projectlombok:lombok'
+    testAnnotationProcessor 'org.projectlombok:lombok'
+
     // JPA 의존성 설정(ORM -- 자바 진영 --> JPA(스펙:인터페이스) --> 하이버 네이트
     implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
     // https://mvnrepository.com/artifact/org.apache.commons/commons-lang3

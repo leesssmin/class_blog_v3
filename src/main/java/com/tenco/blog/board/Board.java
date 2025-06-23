@@ -1,6 +1,7 @@
 package com.tenco.blog.board;
 
 
+import com.tenco.blog.user.User;
 import com.tenco.blog.utils.MyDateUtil;
 import jakarta.persistence.*;
 import lombok.Data;
@@ -21,22 +22,27 @@ public class Board {
 
     private String title;
     private String content;
-    private String username;
-    // CreationTimestamp : 하이버네이트가 제공하는 어노테이션
-    // 엔티티가 처음 저장할 때 현재 시간을 자동으로 설정한다.
-    // pc -> db(날짜 주입)
-    // v1 에서는 SQL now()를 직접 사용했지만 JPA가 자동 처리
+    // V2에서 사용했던 방식
+    // private String username;
+    // V3에서 Board 엔티티는 User 엔티티와 연관관계가 성립이된다.
+
+    // 다대일
+    // 여러개의 게시글에는 한명의 작성자를 가질 수 있다.
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "user_id") // 외래키 컬럼명 명시
+    private User user;
+
+
     @CreationTimestamp
     private Timestamp createdAt; // created_at (스네이크 케이스로 자동 변환)
 
     // 생성자 만들어 주기
-    public Board(String title, String content, String username) {
-        this.title = title;
-        this.content = content;
-        this.username = username;
-        this.id = id;
-        // id 와 createAt은 JPA/Hibernate 가 자동으로 설정
-    }
+//    public Board(String title, String content, String username) {
+//        this.title = title;
+//        this.content = content;
+//        //this.username = username;
+//        // id 와 createAt은 JPA/Hibernate 가 자동으로 설정
+//    }
 
     // 머스태치에서 표현할 시간을 포맷기능을(행위) 스르로 만들자
     public String getTime() {
