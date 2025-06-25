@@ -48,6 +48,9 @@ public class Board {
 //        // id 와 createAt은 JPA/Hibernate 가 자동으로 설정
 //    }
 
+    public boolean isOwner(Long userId){
+        return this.user.getId().equals(userId);
+    }
     // 머스태치에서 표현할 시간을 포맷기능을(행위) 스르로 만들자
     public String getTime() {
         return MyDateUtil.timestampFormat(createdAt);
